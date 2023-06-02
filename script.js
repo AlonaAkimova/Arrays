@@ -76,14 +76,11 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 
 const calcDisplayBalance = movements => {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} EUR`;
 };
-
-calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = movements => {
   const incomes = movements
@@ -107,20 +104,36 @@ const calcDisplaySummary = movements => {
   labelSumInterest.textContent = `${interest} EUR`;
 };
 
-calcDisplaySummary(account1.movements);
 const createUserNames = accounts => {
   accounts.forEach(account => {
     account.username = account.owner
       .toLowerCase()
       .split(' ')
-      .map(name => {
-        return name[0];
-      })
+      .map(name => name[0])
       .join('');
   });
 };
 createUserNames(accounts);
 
+// Event Handlers
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  if (currentAccount && currentAccount.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount.movements);
+  }
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -257,8 +270,18 @@ const eurToUsd = 1.1;
 // console.log(maxValue);
 
 //PIPELINE
-const totalDeposits = movements
-  .filter(mov => mov > 0)
-  .map(mov => mov * eurToUsd)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(totalDeposits);
+// const totalDeposits = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDeposits);
+
+// const firstWithdraw = movements.find(mov => mov < 0);
+// console.log(accounts);
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// for (const acc of accounts) {
+//   if (acc.owner === 'Jessica Davis') {
+//     console.log(acc);
+//   }
+// }
