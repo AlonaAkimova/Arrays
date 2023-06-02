@@ -71,7 +71,22 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
+// currencies.forEach((val, key, map) => {
+//   console.log(`${key}: ${val}`);
+// });
+
+// const currenciesUnique = new Set(['USD', 'USD', 'EUR', 'GBP', 'EUR']);
+
+// currenciesUnique.forEach((val, key, map) => {
+//   console.log(`${key}: ${val}`);
+// });
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// movements.forEach((movement, i) => {
+//   if (movement > 300) {
+//     console.log(`Movement ${i + 1}: You withdrew ${movement}`);
+//   } else console.log(`Movement ${i + 1}: You deposited ${movement}`);
+// });
 
 /////////////////////////////////////////////////
 
