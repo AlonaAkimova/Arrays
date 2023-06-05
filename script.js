@@ -437,3 +437,24 @@ const convertTitleCase = function (title) {
 };
 console.log(convertTitleCase('this is a nice title'));
 console.log(convertTitleCase('this is a LONG title'));
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 200, owners: ['Sarah', 'John'] },
+  { weight: 22, curFood: 250, owners: ['Michael'] },
+];
+
+dogs.forEach(dog => {
+  dog.recFood = Math.trunc(dog.weight ** 0.75 * 28);
+});
+
+let sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(sarahDog);
+
+const ownersEatTooMuch = dogs
+  .filter(dog => dogs.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+const ownersEatTooLittle = dogs
+  .filter(dog => dogs.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
