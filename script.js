@@ -400,3 +400,40 @@ labelBalance.addEventListener('click', function () {
     document.querySelectorAll('.movements__value')
   );
 });
+//1
+const depositSum = accounts
+  .flatMap(acc => {
+    acc.movements;
+  })
+  .filter(mov => mov > 0)
+  .reduce((sum, curr) => sum + curr, 0);
+//2.
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, curr) => (count >= 1000 ? count + 1 : count), 0);
+//3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, curr) => {
+      // curr > 0 ? (sums.deposits += curr) : (sums.withdrawals += curr);
+      sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+//4.
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const expections = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (expections.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title'));
